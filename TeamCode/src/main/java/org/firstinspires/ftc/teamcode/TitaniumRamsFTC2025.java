@@ -1,13 +1,18 @@
+//Paquete principal del programa Team Code.
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.Range;
+//Librerias utilizadas para los dispositivos del robot.
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode; //Framework para robot tipo lineal
+import com.qualcomm.robotcore.hardware.CRServo; //Libreria para servo de giro continuo
+import com.qualcomm.robotcore.hardware.DcMotor; //Libreria para motor DC
+import com.qualcomm.robotcore.hardware.Servo;   //Libreria para Servo Simple.
+import com.qualcomm.robotcore.util.Range;       //Libreria para escalar un valor o un rango de valores.
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name="Titanium Rams V1.0", group="FTC")
-public class StarterBot2025TeleOpJava extends LinearOpMode {
+//Asignacion de nombre de Programa en Driver Station.
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name="Titanium Rams Regional", group="FTC")
+public class TitaniumRamsFTC2025 extends LinearOpMode {
+
+    //Creacion de objetos de motores
 
     private DcMotor leftDrive = null;
     private DcMotor rightDrive = null;
@@ -18,6 +23,7 @@ public class StarterBot2025TeleOpJava extends LinearOpMode {
 
 
     // Arm and Wrist target positions for each state
+    //Posiciones de Arm en diferentes configuraciones.
     private static final int ARM_POSITION_INIT = 300;
     private static final int ARM_POSITION_INTAKE = 450;
     private static final int ARM_POSITION_WALL_GRAB = 1100;
@@ -26,18 +32,18 @@ public class StarterBot2025TeleOpJava extends LinearOpMode {
     private static final int ARM_POSITION_CLIP_HIGH = 2100;
     private static final int ARM_POSITION_LOW_BASKET = 2500;
 
-    
+    //Posiciones de WRIST en diferentes configuraciones.
     private static final int WRIST_POSITION_INIT = 0;
     private static final int WRIST_POSITION_SAMPLE = 270;
     private static final int WRIST_POSITION_SPEC = 10;
 
 
     
-    // Claw positions
+    // Posiciones de CLAW en diferentes configuraciones.
     private static final double CLAW_OPEN_POSITION = 0.55;
     private static final double CLAW_CLOSED_POSITION = 0.7;
 
-    // Enum for state machine
+    // ENUM para asignacion de los diferentes estados del robot.
     private enum RobotState {
         INIT,
         INTAKE,
@@ -49,16 +55,16 @@ public class StarterBot2025TeleOpJava extends LinearOpMode {
         MANUAL
     }
 
-    // Initial state
+    // Enviar robot a posicion inicial.
     private RobotState currentState = RobotState.INIT;
 
-    // Claw toggle state
+    // CLAW toggle state.
     private boolean clawOpen = true;
     private boolean lastBump = false;
     private boolean lastHook = false;
     private boolean lastGrab = false;
     
-    //target position
+    //target position de arm y Wrist.
     private int targetArm = 0;
     private int targetWrist = 0;
 
