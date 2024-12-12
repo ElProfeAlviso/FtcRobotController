@@ -8,11 +8,12 @@ import com.qualcomm.robotcore.hardware.DcMotor; //Libreria para motor DC
 import com.qualcomm.robotcore.hardware.Servo;   //Libreria para Servo Simple.
 import com.qualcomm.robotcore.util.Range;       //Libreria para escalar un valor o un rango de valores.
 
-//Asignacion de nombre de Programa en Driver Station.
+
+//Asignación de nombre de Programa en Driver Station.
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name="Titanium Rams Regional", group="FTC")
 public class TitaniumRamsFTC2025 extends LinearOpMode {
 
-    //Creacion de objetos de motores
+    //Creación de objetos de motores
 
     private DcMotor leftDrive = null;
     private DcMotor rightDrive = null;
@@ -25,25 +26,26 @@ public class TitaniumRamsFTC2025 extends LinearOpMode {
     // Arm and Wrist target positions for each state
     //Posiciones de Arm en diferentes configuraciones.
     private static final int ARM_POSITION_INIT = 300;
-    private static final int ARM_POSITION_INTAKE = 450;
-    private static final int ARM_POSITION_WALL_GRAB = 1100;
-    private static final int ARM_POSITION_WALL_UNHOOK = 1700;
-    private static final int ARM_POSITION_HOVER_HIGH = 2600;
-    private static final int ARM_POSITION_CLIP_HIGH = 2100;
-    private static final int ARM_POSITION_LOW_BASKET = 2500;
+    private static final int ARM_POSITION_INTAKE = 300;
+    private static final int ARM_POSITION_WALL_GRAB = 920;
+    private static final int ARM_POSITION_WALL_UNHOOK = 1270;
+    private static final int ARM_POSITION_HOVER_HIGH = 1950;
+    private static final int ARM_POSITION_CLIP_HIGH = 1500;
+    private static final int ARM_POSITION_LOW_BASKET = 1870;
 
     //Posiciones de WRIST en diferentes configuraciones.
     private static final int WRIST_POSITION_INIT = 0;
-    private static final int WRIST_POSITION_SAMPLE = 270;
+    private static final int WRIST_POSITION_SAMPLE = 230;
     private static final int WRIST_POSITION_SPEC = 10;
+    private static final int WRIST_POSITION_BASKET = 285;
 
 
     
     // Posiciones de CLAW en diferentes configuraciones.
-    private static final double CLAW_OPEN_POSITION = 0.55;
+    private static final double CLAW_OPEN_POSITION = 0.45;
     private static final double CLAW_CLOSED_POSITION = 0.7;
 
-    // ENUM para asignacion de los diferentes estados del robot.
+    // ENUM para asignación de los diferentes estados del robot.
     private enum RobotState {
         INIT,
         INTAKE,
@@ -55,7 +57,7 @@ public class TitaniumRamsFTC2025 extends LinearOpMode {
         MANUAL
     }
 
-    // Enviar robot a posicion inicial.
+    // Enviar robot a posición inicial.
     private RobotState currentState = RobotState.INIT;
 
     // CLAW toggle state.
@@ -142,7 +144,7 @@ public class TitaniumRamsFTC2025 extends LinearOpMode {
                     break;
                 case LOW_BASKET:
                     targetArm = ARM_POSITION_LOW_BASKET;
-                    targetWrist = WRIST_POSITION_SAMPLE;
+                    targetWrist = WRIST_POSITION_BASKET;
                     telemetry.addData("State", "LOW_BASKET");
                     break;
                 case MANUAL:
@@ -153,7 +155,7 @@ public class TitaniumRamsFTC2025 extends LinearOpMode {
             
             
 
-            // Handle state transitions based on gamepad input
+            // Handle state transitions based on Gamepad input
             if (gamepad1.a) {
                 currentState = RobotState.INTAKE;
             } else if (gamepad1.b && !lastGrab) {
@@ -200,7 +202,7 @@ public class TitaniumRamsFTC2025 extends LinearOpMode {
             }
             lastBump = gamepad1.right_bumper;
 
-            // Control intake servo with triggerss
+            // Control intake servo with triggers
             if (gamepad1.right_trigger>0.1) {
                 intake.setPower(1.0);
             } else if (gamepad1.left_trigger>0.1) {
