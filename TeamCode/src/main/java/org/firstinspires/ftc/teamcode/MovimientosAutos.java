@@ -7,14 +7,16 @@ import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 //Propiedades de visualizacion Driver Station.
-@Autonomous(name="Auto Moves", group="Autos")
+@Autonomous(name="Auto Moves", group="Autos",preselectTeleOp="TitaniumRamsRegional")
 
 //Clase principal del programa (IMU utilizado modelo:
 public class MovimientosAutos extends LinearOpMode {
@@ -24,6 +26,8 @@ public class MovimientosAutos extends LinearOpMode {
     private DcMotor rightDrive = null;
     private BHI260IMU imu;
     private Orientation angulos;
+    private DistanceSensor distanceSensor;
+    private double distancia;
 
     // Definir el objetivo en pulgadas
     // Definir la circunferencia del rueda en pulgadas
@@ -54,6 +58,9 @@ public class MovimientosAutos extends LinearOpMode {
         // Los parámetros son limitados en BHI260AP,
         // generalmente no se necesitan configuraciones adicionales.
 
+        distanceSensor = hardwareMap.get(DistanceSensor.class, "distancia");
+        distancia = distanceSensor.getDistance(DistanceUnit.CM);
+
         imu = hardwareMap.get(BHI260IMU.class, "imu");
         BHI260IMU.Parameters parametrosIMU = new BHI260IMU.Parameters(
                 new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.FORWARD, RevHubOrientationOnRobot.UsbFacingDirection.LEFT)
@@ -66,18 +73,18 @@ public class MovimientosAutos extends LinearOpMode {
         sleep(100); // Pausa corta para asegurar la inicialización
 
         telemetry.addData("IMU", "Inicializado");
+        telemetry.addData("Distancia", distancia);
         telemetry.update();
 
         // La funcion waitForStart() espera a que el boton de play sea presionado.
 
         waitForStart();
 
-        //Secuencia de comandos autonomos.
+        //===================SECUENCIA DE COMANDOS AUTONOMOS====================================
 
         Adelante(15,0.5,500);
         Atras(15,0.5,500);
         girarIzquierda(90,0.6,500); // Girar 90 grados a la izquierda
-        sleep(1000); // Pausa de 1 segundo
         girarDerecha(90,0.6,500);  // Girar 45 grados a la derecha
 
 
@@ -178,10 +185,10 @@ public class MovimientosAutos extends LinearOpMode {
     // Función principal para realizar el giro
     private void girar(double grados, double Power, long SLEEPTIME) {
 
-        leftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        imu.resetYaw();
+        //imu.resetYaw();
         angulos = imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         double anguloInicial = angulos.firstAngle;
         double anguloObjetivo = anguloInicial + grados;
@@ -202,8 +209,10 @@ public class MovimientosAutos extends LinearOpMode {
             leftDrive.setPower(-potencia);
             rightDrive.setPower(potencia);
 
+            telemetry.addLine("==Angulo del IMU==");
             telemetry.addData("Ángulo actual", angulos.firstAngle);
             telemetry.addData("Ángulo objetivo", anguloObjetivo);
+            telemetry.addLine("**Potencias del Drive**");
             telemetry.addData("LeftDrive", leftDrive.getPower());
             telemetry.addData("RightDrive", rightDrive.getPower());
             telemetry.update();

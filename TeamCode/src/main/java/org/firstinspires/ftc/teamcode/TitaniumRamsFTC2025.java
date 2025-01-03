@@ -2,15 +2,16 @@
 package org.firstinspires.ftc.teamcode;
 
 //Librerias utilizadas para los dispositivos del robot.
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode; //Framework para robot tipo lineal
-import com.qualcomm.robotcore.hardware.CRServo; //Libreria para servo de giro continuo
-import com.qualcomm.robotcore.hardware.DcMotor; //Libreria para motor DC
-import com.qualcomm.robotcore.hardware.Servo;   //Libreria para Servo Simple.
-import com.qualcomm.robotcore.util.Range;       //Libreria para escalar un valor o un rango de valores.
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Range;
 
 
 //Asignación de nombre de Programa en Driver Station.
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name="Titanium Rams Regional", group="FTC")
+@TeleOp(name="TitaniumRamsRegional", group="FTC")
 public class TitaniumRamsFTC2025 extends LinearOpMode {
 
     //Creación de objetos de motores
