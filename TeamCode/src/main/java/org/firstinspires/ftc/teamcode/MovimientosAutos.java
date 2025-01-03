@@ -83,10 +83,29 @@ public class MovimientosAutos extends LinearOpMode {
 
         //===================SECUENCIA DE COMANDOS AUTONOMOS====================================
 
-        Adelante(15,0.5,500);
-        Atras(15,0.5,500);
-        girarIzquierda(90,0.6,500); // Girar 90 grados a la izquierda
-        girarDerecha(90,0.6,500);  // Girar 45 grados a la derecha
+        Adelante(30,0.6,100);
+        Atras(10,0.6,100);
+        girarIzquierda(90,0.6,100);
+        Adelante(40,0.6,100);
+        girarDerecha(90,0.5,100);
+        Adelante(55,0.6,100);
+        girarIzquierda(90,0.6,100);
+        Adelante(5,0.6,100);
+        girarDerecha(100,0.6,100);
+        Atras(70,0.6,100);
+        Adelante(70,0.6,100);
+        girarIzquierda(100,0.6,100);
+        Adelante(10,0.6,100);
+        girarDerecha(100,0.6,100);
+        Atras(70,0.6,100);
+        Adelante(70,0.6,100);
+        girarIzquierda(100,0.6,100);
+        Adelante(10,0.6,100);
+        girarDerecha(90,0.6,100);
+        Atras(70,0.6,100);
+
+
+
 
 
 
@@ -178,10 +197,10 @@ public class MovimientosAutos extends LinearOpMode {
 
 
     // Función para girar a la izquierda (grados positivos)
-    private void girarIzquierda(double grados, double Power, long SLEEPTIME) { girar(grados,Power,SLEEPTIME);}
+    private void girarIzquierda(double grados , double Power, long SLEEPTIME) { girar((grados - 5),Power,SLEEPTIME);}
 
     // Función para girar a la derecha (grados negativos)
-    private void girarDerecha(double grados, double Power, long SLEEPTIME) { girar(-grados,Power,SLEEPTIME); }
+    private void girarDerecha(double grados , double Power, long SLEEPTIME) { girar(-(grados -5) ,Power,SLEEPTIME); }
 
     // Función principal para realizar el giro
     private void girar(double grados, double Power, long SLEEPTIME) {
@@ -189,7 +208,7 @@ public class MovimientosAutos extends LinearOpMode {
         leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        //imu.resetYaw();
+        imu.resetYaw();
         angulos = imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         double anguloInicial = angulos.firstAngle;
         double anguloObjetivo = anguloInicial + grados;
@@ -202,7 +221,7 @@ public class MovimientosAutos extends LinearOpMode {
             anguloObjetivo += 360;
         }
 
-        while (opModeIsActive() && Math.abs(angulos.firstAngle - anguloObjetivo) > 1) {
+        while (opModeIsActive() && Math.abs(angulos.firstAngle - anguloObjetivo) > 2) {
             angulos = imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
 
             double potencia = (grados > 0 ? Power : -Power); // Ajustar la potencia según la dirección
