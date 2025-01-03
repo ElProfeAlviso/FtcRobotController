@@ -63,8 +63,9 @@ public class MovimientosAutos extends LinearOpMode {
 
         imu = hardwareMap.get(BHI260IMU.class, "imu");
         BHI260IMU.Parameters parametrosIMU = new BHI260IMU.Parameters(
-                new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.FORWARD, RevHubOrientationOnRobot.UsbFacingDirection.LEFT)
-                );
+                new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.FORWARD,
+                        RevHubOrientationOnRobot.UsbFacingDirection.LEFT) );
+
                        
         imu.initialize(parametrosIMU);
 
@@ -73,7 +74,7 @@ public class MovimientosAutos extends LinearOpMode {
         sleep(100); // Pausa corta para asegurar la inicialización
 
         telemetry.addData("IMU", "Inicializado");
-        telemetry.addData("Distancia", distancia);
+        telemetry.addData("Distancia Init", distancia);
         telemetry.update();
 
         // La funcion waitForStart() espera a que el boton de play sea presionado.
