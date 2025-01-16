@@ -5,6 +5,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.bosch.BHI260IMU;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
@@ -16,7 +17,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 //Propiedades de visualizacion Driver Station.
-@Autonomous(name="Auto Moves", group="Autos",preselectTeleOp="TitaniumRamsRegional")
+@Disabled
+@Autonomous(name="Auto Izquierdo", group="Autos",preselectTeleOp="TitaniumRamsRegional")
 
 //Clase principal del programa (IMU utilizado modelo:
 public class AutoIzquierdo extends LinearOpMode {
