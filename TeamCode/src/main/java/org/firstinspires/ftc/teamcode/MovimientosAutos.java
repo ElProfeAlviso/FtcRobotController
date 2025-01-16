@@ -80,7 +80,8 @@ public class MovimientosAutos extends LinearOpMode {
     }
 
     // Enviar robot a posición inicial.
-    private RobotState currentState = RobotState.INIT;
+
+    //private RobotState currentState = RobotState.INIT;
 
     // CLAW toggle state.
     private boolean clawOpen = true;
@@ -128,6 +129,8 @@ public class MovimientosAutos extends LinearOpMode {
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        claw.setPosition(CLAW_CLOSED_POSITION);
+
         // 2. Inicialización del IMU BHI260AP
 
         // Los parámetros son limitados en BHI260AP,
@@ -158,9 +161,13 @@ public class MovimientosAutos extends LinearOpMode {
 
 
         //===================SECUENCIA DE COMANDOS AUTONOMOS====================================
-        CerrarGarra();
-        RobotState(RobotState.INIT);
+        CerrarGarra(100);
+        RobotState(RobotState.INIT, 200);
+        RobotState(RobotState.WALL_UNHOOK,0);
         Adelante(30, 0.6, 100);
+        RobotState(RobotState.WALL_GRAB,300);
+        AbrirGarra(500);
+        RobotState(RobotState.INIT,400);
         Atras(10, 0.6, 100);
         girarIzquierda(90, 0.6, 100);
         Adelante(40, 0.6, 100);
@@ -323,15 +330,17 @@ public class MovimientosAutos extends LinearOpMode {
         sleep(SLEEPTIME);
     }
 
-    private void AbrirGarra(){
+    private void AbrirGarra(long sleep){
 
         claw.setPosition(CLAW_OPEN_POSITION);
+        sleep(sleep);
 
     }
 
-    private void CerrarGarra() {
+    private void CerrarGarra(long sleep) {
 
         claw.setPosition(CLAW_CLOSED_POSITION);
+        sleep(sleep);
     }
 
     private void IntakeMeter (){
@@ -348,9 +357,9 @@ public class MovimientosAutos extends LinearOpMode {
         intake.setPower(0);
     }
 
-    private void RobotState(RobotState currentState) {
+    private void RobotState(RobotState currentState, long sleep) {
 
-        while (opModeIsActive()) {
+
 
             switch (currentState) {
                 case INIT:
@@ -405,7 +414,7 @@ public class MovimientosAutos extends LinearOpMode {
             arm.setPower(1);
             wrist.setPower(1);
 
-            // Send telemetry data to the driver station
+        while (opModeIsActive() && (arm.isBusy() || wrist.isBusy())) { // Send telemetry data to the driver station
             telemetry.addData("Claw Position", clawOpen ? "Open" : "Closed");
             telemetry.addData("Arm Position", arm.getCurrentPosition());
             telemetry.addData("Arm Power", arm.getPower());
@@ -413,6 +422,9 @@ public class MovimientosAutos extends LinearOpMode {
             telemetry.addData("Wrist Power", wrist.getPower());
             telemetry.update();
         }
+
+        sleep(sleep);
+
 
     }
 }
