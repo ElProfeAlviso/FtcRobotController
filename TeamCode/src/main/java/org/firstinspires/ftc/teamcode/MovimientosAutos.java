@@ -158,7 +158,8 @@ public class MovimientosAutos extends LinearOpMode {
 
 
         //===================SECUENCIA DE COMANDOS AUTONOMOS====================================
-        currentState = RobotState.INIT;
+        CerrarGarra();
+        RobotState(RobotState.INIT);
         Adelante(30, 0.6, 100);
         Atras(10, 0.6, 100);
         girarIzquierda(90, 0.6, 100);
@@ -182,69 +183,7 @@ public class MovimientosAutos extends LinearOpMode {
 
 
 
-            while (opModeIsActive()) {
 
-                switch (currentState) {
-                    case INIT:
-                        targetArm = ARM_POSITION_INIT;
-                        targetWrist = WRIST_POSITION_INIT;
-                        telemetry.addData("State", "INIT");
-                        break;
-                    case INTAKE:
-                        targetArm = ARM_POSITION_INTAKE;
-                        targetWrist = WRIST_POSITION_SAMPLE;
-                        telemetry.addData("State", "INTAKE");
-                        break;
-
-                    case WALL_GRAB:
-                        targetArm = ARM_POSITION_WALL_GRAB;
-                        targetWrist = WRIST_POSITION_SPEC;
-                        telemetry.addData("State", "WALL_GRAB");
-                        break;
-
-                    case WALL_UNHOOK:
-                        targetArm = ARM_POSITION_WALL_UNHOOK;
-                        targetWrist = WRIST_POSITION_SPEC;
-                        telemetry.addData("State", "WALL_UNHOOK");
-                        break;
-
-                    case HOVER_HIGH:
-                        targetArm = ARM_POSITION_HOVER_HIGH;
-                        targetWrist = WRIST_POSITION_SPEC;
-                        telemetry.addData("State", "HOVER_HIGH");
-                        break;
-
-                    case CLIP_HIGH:
-                        targetArm = ARM_POSITION_CLIP_HIGH;
-                        targetWrist = WRIST_POSITION_SPEC;
-                        telemetry.addData("State", "CLIP_HIGH");
-                        break;
-                    case LOW_BASKET:
-                        targetArm = ARM_POSITION_LOW_BASKET;
-                        targetWrist = WRIST_POSITION_BASKET;
-                        telemetry.addData("State", "LOW_BASKET");
-                        break;
-                    case MANUAL:
-                        telemetry.addData("State", "MANUAL");
-                        break;
-                }
-
-
-                arm.setTargetPosition(targetArm);
-                arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                wrist.setTargetPosition(targetWrist);
-                wrist.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                arm.setPower(1);
-                wrist.setPower(1);
-
-                // Send telemetry data to the driver station
-                telemetry.addData("Claw Position", clawOpen ? "Open" : "Closed");
-                telemetry.addData("Arm Position", arm.getCurrentPosition());
-                telemetry.addData("Arm Power", arm.getPower());
-                telemetry.addData("Wrist Position", wrist.getCurrentPosition());
-                telemetry.addData("Wrist Power", wrist.getPower());
-                telemetry.update();
-            }
         }
 
 
@@ -407,6 +346,74 @@ public class MovimientosAutos extends LinearOpMode {
 
     private void IntakeStop (){
         intake.setPower(0);
+    }
+
+    private void RobotState(RobotState currentState) {
+
+        while (opModeIsActive()) {
+
+            switch (currentState) {
+                case INIT:
+                    targetArm = ARM_POSITION_INIT;
+                    targetWrist = WRIST_POSITION_INIT;
+                    telemetry.addData("State", "INIT");
+                    break;
+                case INTAKE:
+                    targetArm = ARM_POSITION_INTAKE;
+                    targetWrist = WRIST_POSITION_SAMPLE;
+                    telemetry.addData("State", "INTAKE");
+                    break;
+
+                case WALL_GRAB:
+                    targetArm = ARM_POSITION_WALL_GRAB;
+                    targetWrist = WRIST_POSITION_SPEC;
+                    telemetry.addData("State", "WALL_GRAB");
+                    break;
+
+                case WALL_UNHOOK:
+                    targetArm = ARM_POSITION_WALL_UNHOOK;
+                    targetWrist = WRIST_POSITION_SPEC;
+                    telemetry.addData("State", "WALL_UNHOOK");
+                    break;
+
+                case HOVER_HIGH:
+                    targetArm = ARM_POSITION_HOVER_HIGH;
+                    targetWrist = WRIST_POSITION_SPEC;
+                    telemetry.addData("State", "HOVER_HIGH");
+                    break;
+
+                case CLIP_HIGH:
+                    targetArm = ARM_POSITION_CLIP_HIGH;
+                    targetWrist = WRIST_POSITION_SPEC;
+                    telemetry.addData("State", "CLIP_HIGH");
+                    break;
+                case LOW_BASKET:
+                    targetArm = ARM_POSITION_LOW_BASKET;
+                    targetWrist = WRIST_POSITION_BASKET;
+                    telemetry.addData("State", "LOW_BASKET");
+                    break;
+                case MANUAL:
+                    telemetry.addData("State", "MANUAL");
+                    break;
+            }
+
+
+            arm.setTargetPosition(targetArm);
+            arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            wrist.setTargetPosition(targetWrist);
+            wrist.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            arm.setPower(1);
+            wrist.setPower(1);
+
+            // Send telemetry data to the driver station
+            telemetry.addData("Claw Position", clawOpen ? "Open" : "Closed");
+            telemetry.addData("Arm Position", arm.getCurrentPosition());
+            telemetry.addData("Arm Power", arm.getPower());
+            telemetry.addData("Wrist Position", wrist.getCurrentPosition());
+            telemetry.addData("Wrist Power", wrist.getPower());
+            telemetry.update();
+        }
+
     }
 }
 
