@@ -171,6 +171,7 @@ public class AutoIzquierdo extends LinearOpMode {
         AbrirGarra(300);
         Atras(10, 0.7, 400);
         RobotState(RobotState.INIT,400);
+
         girarIzquierda(90, 0.6, 100);
         Adelante(41, 0.8, 100);
         girarDerecha(90, 0.6, 100);

@@ -19,7 +19,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 
 //Propiedades de visualizacion Driver Station.
-@Autonomous(name="Auto Izquierda", group="Autos",preselectTeleOp="TitaniumRamsRegional")
+@Autonomous(name="Auto Derecha", group="Autos",preselectTeleOp="TitaniumRamsRegional")
 
 //Clase principal del programa (IMU utilizado modelo:
 public class AutoDerecha extends LinearOpMode {
@@ -159,6 +159,9 @@ public class AutoDerecha extends LinearOpMode {
         waitForStart();
 
 
+
+
+
         //===================SECUENCIA DE COMANDOS AUTONOMOS====================================
         CerrarGarra(0);
         RobotState(RobotState.INIT, 200);
@@ -167,23 +170,24 @@ public class AutoDerecha extends LinearOpMode {
         RobotState(RobotState.CLIP_HIGH,500);
         AbrirGarra(300);
         Atras(10, 0.7, 400);
-        RobotState(RobotState.INIT,400);
-        girarIzquierda(90, 0.6, 100);
-        Adelante(41, 0.8, 100);
-        girarDerecha(90, 0.6, 100);
+        RobotState(RobotState.INIT,300);
+
+        girarDerecha(90, 0.6, 100); //Derecha
+        Adelante(44, 0.8, 100);
+        girarIzquierda(88, 0.4, 100); //Izquierda
         Adelante(55, 0.8, 100);
-        girarIzquierda(90, 0.6, 100);
-        Adelante(11, 0.8, 100);
-        girarDerecha(100, 0.6, 100);
+        girarDerecha(90, 0.6, 100); //Derecha
+        Adelante(15, 0.8, 100);
+        girarIzquierda(95, 0.6, 100); //izquierda
         Atras(65, 0.8, 100);
         Adelante(65, 0.8, 100);
-        girarIzquierda(100, 0.6, 100);
-        Adelante(10, 0.8, 100);
-        girarDerecha(87, 0.6, 100);
+        girarDerecha(100, 0.4, 100); //Derecha
+        Adelante(20, 0.8, 100);
+        girarIzquierda(91, 0.6, 100); //Izquierda
         Atras(65, 0.8, 100);
         Adelante(65, 0.8, 100);
-        girarDerecha(85,0.6,100);
-        Adelante(49,0.8,100);
+        girarIzquierda(85,0.6,100); //Izquierda
+        Adelante(35,0.8,100);
 
 
 
