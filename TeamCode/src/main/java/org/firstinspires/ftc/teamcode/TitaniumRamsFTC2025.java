@@ -43,7 +43,7 @@ public class TitaniumRamsFTC2025 extends LinearOpMode {
 
     
     // Posiciones de CLAW en diferentes configuraciones.
-    private static final double CLAW_OPEN_POSITION = 0.50;
+    private static final double CLAW_OPEN_POSITION = 0.55;
     private static final double CLAW_CLOSED_POSITION = 0.65;
 
     // ENUM para asignación de los diferentes estados del robot.

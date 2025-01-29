@@ -1,31 +1,28 @@
 package org.firstinspires.ftc.teamcode;
 
 //Importacion de librerias de OpModes
+
+import com.qualcomm.hardware.bosch.BHI260IMU;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
-//Importacion de librerias de motores
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-//Importacion de librerias de sensores
-import com.qualcomm.hardware.bosch.BHI260IMU; //Libreria de IMU integrada del Control HUB
-import com.qualcomm.hardware.rev.RevHubOrientationOnRobot; //Libreria de Orientacion del robot
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-import com.qualcomm.robotcore.hardware.DistanceSensor;
-
 
 //Propiedades de visualizacion Driver Station.
 @Autonomous(name="Auto Izquierda", group="Autos",preselectTeleOp="TitaniumRamsRegional")
 
 //Clase principal del programa (IMU utilizado modelo:
-public class AutoIzquierdo extends LinearOpMode {
+public class AutoDerecha extends LinearOpMode {
 
     // Declarar los objetos de motores
     private DcMotor leftDrive = null;
