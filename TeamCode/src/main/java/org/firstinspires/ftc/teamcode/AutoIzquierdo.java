@@ -49,7 +49,7 @@ public class AutoIzquierdo extends LinearOpMode {
 
     // Arm and Wrist target positions for each state
     //Posiciones de Arm en diferentes configuraciones.
-    private static final int ARM_POSITION_INIT = 170;
+    private static final int ARM_POSITION_INIT = 220;
     private static final int ARM_POSITION_INTAKE = 300;
     private static final int ARM_POSITION_WALL_GRAB = 920;
     private static final int ARM_POSITION_WALL_UNHOOK = 1270;
@@ -66,8 +66,8 @@ public class AutoIzquierdo extends LinearOpMode {
 
 
     // Posiciones de CLAW en diferentes configuraciones.
-    private static final double CLAW_OPEN_POSITION = 0.55;
-    private static final double CLAW_CLOSED_POSITION = 0.65;
+    private static final double CLAW_OPEN_POSITION = 0.53;
+    private static final double CLAW_CLOSED_POSITION = 0.72;
 
     // ENUM para asignación de los diferentes estados del robot.
     private enum RobotState {
