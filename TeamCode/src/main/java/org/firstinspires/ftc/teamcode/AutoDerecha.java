@@ -64,7 +64,7 @@ public class AutoDerecha extends LinearOpMode {
 
     // Posiciones de CLAW en diferentes configuraciones.
     private static final double CLAW_OPEN_POSITION = 0.53;
-    private static final double CLAW_CLOSED_POSITION = 0.72;
+    private static final double CLAW_CLOSED_POSITION = 0.75;
 
     // ENUM para asignación de los diferentes estados del robot.
     private enum RobotState {
@@ -166,28 +166,37 @@ public class AutoDerecha extends LinearOpMode {
         CerrarGarra(0);
         RobotState(RobotState.INIT, 200);
         RobotState(RobotState.HOVER_HIGH,500);
-        Adelante(28, 0.6, 500);
+        Adelante(31.5, 0.6, 500);
         RobotState(RobotState.CLIP_HIGH,500);
         AbrirGarra(300);
-        Atras(10, 0.7, 400);
+        Atras(10, 0.7, 300);
         RobotState(RobotState.INIT,300);
 
-        girarDerecha(90, 0.6, 100); //Derecha
-        Adelante(44, 0.8, 100);
+        girarDerecha(90, 0.5, 100); //Derecha
+        Adelante(34, 0.8, 100);
         girarIzquierda(88, 0.4, 100); //Izquierda
-        Adelante(55, 0.8, 100);
+        Adelante(47, 0.8, 100);
         girarDerecha(90, 0.6, 100); //Derecha
-        Adelante(15, 0.8, 100);
+        Adelante(10, 0.8, 100);
         girarIzquierda(95, 0.6, 100); //izquierda
-        Atras(65, 0.8, 100);
-        Adelante(65, 0.8, 100);
+        Atras(57, 0.8, 100);
+
+/*
+Adelante(|5, 0.8, 100);
+girarIzquierda(185, 0.6, 4000); //izquierda
+
+
+
+ */
+
+        Adelante(60, 0.8, 100);
         girarDerecha(100, 0.4, 100); //Derecha
-        Adelante(20, 0.8, 100);
+        Adelante(18, 0.8, 100);
         girarIzquierda(91, 0.6, 100); //Izquierda
-        Atras(65, 0.8, 100);
-        Adelante(65, 0.8, 100);
+        Atras(60, 0.8, 100);
+        Adelante(60, 0.8, 100);
         girarIzquierda(85,0.6,100); //Izquierda
-        Adelante(35,0.8,100);
+        Adelante(20,0.8,100);
 
 
 
